@@ -1,0 +1,201 @@
+<!-- 見えない部分 -->
+<html>
+<head>
+<link rel="stylesheet" href="index.css">	
+<script>
+
+	var mode = "title"
+	let Q = "" 
+	var long = ""
+	var d = ""
+	var e = ""
+	var pressed = ""
+	let Qa = ["フシギダネ","フシギソウ","フシギバナ"];
+	let Qj = ["ふしぎだね","ふしぎそう","ふしぎばな"];
+	let v = ""
+	var main = ""
+    var pop = ""
+	let times = ""
+
+	function change(kana) {
+		const table = {
+			"あ":["a"], "い":["i","yi"], "う":["u","wu"], "え":["e"], "お":["o"],
+			"か":["ka","ca"], "き":["ki"], "く":["ku","cu","qu"], "け":["ke"], "こ":["ko","co"],
+			"さ":["sa"], "し":["si","shi","ci"], "す":["su"], "せ":["se","ce"], "そ":["so"],
+			"た":["ta"], "ち":["ti","chi"], "つ":["tu","tsu"], "て":["te"], "と":["to"],
+			"な":["na"], "に":["ni"], "ぬ":["nu"], "ね":["ne"], "の":["no"],
+			"は":["ha"], "ひ":["hi"], "ふ":["hu","fu"], "へ":["he"], "ほ":["ho"],
+			"ま":["ma"], "み":["mi"], "む":["mu"], "め":["me"], "も":["mo"],
+			"や":["ya"], "ゆ":["yu"], "よ":["yo"],
+			"ら":["ra"], "り":["ri"], "る":["ru"], "れ":["re"], "ろ":["ro"],
+			"わ":["wa"], "ゐ":["wi"], "ゑ":["we"], "を":["wo"],
+			"が":["ga"], "ぎ":["gi"], "ぐ":["gu"], "げ":["ge"], "ご":["go"],
+			"ざ":["za"], "じ":["zi","ji"], "ず":["zu"], "ぜ":["ze"], "ぞ":["zo"],
+			"だ":["da"], "ぢ":["di"], "づ":["du"], "で":["de"], "ど":["do"],
+			"ば":["ba"], "び":["bi"], "ぶ":["bu"], "べ":["be"], "ぼ":["bo"],
+			"ぱ":["pa"], "ぴ":["pi"], "ぷ":["pu"], "ぺ":["pe"], "ぽ":["po"],
+			"うぁ":["wha"], "うぃ":["whi"], "うぇ":["whe"], "うぉ":["who"],
+			"きゃ":["kya"], "きぃ":["kyi"], "きゅ":["kyo"], "きぇ":["kye"], "きょ":["kyo"],
+			"しゃ":["sya","sha"], "しゅ":["syu","shu"], "しょ":["syo","sho"],
+			"ちゃ":["tya","cho"],　"ちぃ":["tyi"], "ちゅ":["tyu","chu"], "ちぇ":["tye"], "ちょ":["tyo","cho"],
+			"つぁ":["tsa"], "つぃ":["tsi"], "つぇ":["tse"], "つぉ":["tso"],
+			"てゃ":["tha"], "てぃ":["thi"], "てゅ":["the"], "てぇ":["tho"], "てょ":["tho"],
+			"とぁ":["twa"], "とぃ":["twi"], "とぅ":["twu"], "とぇ":["two"], "とぉ":["two"],
+			"にゃ":["nya"], "にぃ":["nyi"], "にゅ":["nyu"], "にぇ":["nye"], "にょ":["nyo"],
+			"ふぁ":["fa"], "ふぃ":["fi"], "ふぇ":["fe"], "ふぉ":["fo"],
+			"みゃ":["mya"], "みぃ":["myi"], "みゅ":["myu"], "みぇ":["mye"], "みょ":["myo"],
+			"りゃ":["rya"], "りぃ":["ryi"], "りゅ":["ryu"], "りぇ":["rye"], "りょ":["ryo"],
+			"ヴぁ":["va"], "ヴぃ":["vi"], "ヴ":["vu"], "ヴぇ":["ve"], "ヴぉ":["vo"],
+			"ぎゃ":["gya"], "ぎぃ":["gyi"], "ぎゅ":["gyu"], "ぎぇ":["gye"], "ぎょ":["gyo"],
+			"ぐぁ":["gwa"], "ぐぃ":["gwi"], "ぐぅ":["gwu"], "ぐぇ":["gwe"], "ぐぉ":["gwo"],
+			"じゃ":["zya","ja"], "じぃ":["zyi","jyi"], "じゅ":["zyu","ju"], "じぇ":["zye","je"], "じょ":["jo","zyo"],
+			"ぢゃ":["dya"], "ぢぃ":["dyi"], "ぢゅ":["dyu"], "ぢぇ":["dye"], "ぢょ":["dyo"],
+			"でゃ":["dha"], "でぃ":["dhi"], "でゅ":["dhu"], "でぇ":["dhe"], "でょ":["dho"],
+			"びゃ":["bya"], "びぃ":["byi"], "びゅ":["byu"], "びぇ":["bye"], "びょ":["byo"],
+			"ぴゃ":["pya"], "ぴぃ":["pyi"], "ぴゅ":["pyu"], "ぴぇ":["pye"], "ぴょ":["pyo"],
+			"ぁ":["xa","la"], "ぃ":["xi","li"], "ぅ":["xu","lu"], "ぇ":["xe","le"], "ぉ":["xo","lo"],
+			"ゃ":["xya","lya"], "ゅ":["xyu","lyu"], "ぇ":["xye","lye"], "ヵ":["xka","lka"],
+			'ー':['-'], ',':[','], '.':['.'], '、':[','], '。':['.']
+		};
+
+		let roma = [];
+		const Kana = String(kana)
+
+		for (let i = 0; i < Kana.length; i++) {
+
+			const c = Kana.charAt(i);
+
+        	roma.push(table[c]);
+
+    	} return roma;
+
+	}
+
+
+
+
+	document.addEventListener('keydown', (event) => {
+		var keyName = event.key//押されたキーを判定
+
+		function start() {
+			v = 0
+			pop = ""
+			times = 0
+			main = ""
+			e = ""
+
+			let Q_No = Math.floor( Math.random() * Qa.length);//問題をランダムで出題する
+			Q = change(Qj[Q_No])
+			
+
+			for (let i = 0; i < Q.length; i ++){
+				main += Q[i][0]
+			};
+			
+			document.querySelector('#a').textContent = Qa[Q_No];
+			document.querySelector('#b').textContent = "";
+			document.querySelector('#c').textContent = main;
+		};
+
+		if (mode == "title" && keyName == " ") {
+			start();
+			mode = "play";
+		};
+
+		if (mode === "play") {
+
+			let n = 0
+
+			let x = Q[times].length
+			let z = 0
+
+			console.log(x)
+
+			for (let y = 0; y < x; y++) {
+
+				if (!Q[times][y] == "") {
+					if (Q[times][y][0] == keyName) {
+        				z = 1
+						console.log(keyName)
+					};
+				};
+			};
+
+			if (z == 1) {
+				for (let y = 0; y < x || n < 1; y++) {
+					if (!Q[times][y] == "") {
+						if (Q[times][y][0] !== keyName) {//不正解した場合
+
+							console.log(`${n}終了信号`)
+							delete Q[times][y]
+
+						} else {//正解した場合
+					
+							console.log(`${Q[times][y][1]}です`)
+
+							if (Q[times][y][1] == undefined) {
+
+								delete Q[times]
+								times = times + 1
+
+							}  else {
+								
+								Q[times][y] = Q[times][y][1]
+								n = 1
+
+							}
+
+							main = ""
+
+							e = e + keyName
+							alert(e)
+							document.querySelector('#b').textContent = e
+							
+							for (let i = times; i < Q.length; i ++) {
+								if (i == times) {
+									main += Q[i][y]
+								} else {
+									main += Q[i][0]
+								}
+							};
+			
+							console.log(main)
+		
+							document.querySelector('#c').textContent = main;
+							
+
+						};
+					};
+				}
+			};
+
+			pop = 0
+			console.log(Q)
+
+			main = ""
+			
+			if (document.querySelector('#c').textContent == "") {
+				start()
+				e = ""
+			}
+		}
+
+		if (keyName == "1") {
+			alert(document.querySelector('#c').textContent)
+		}
+
+	});
+
+</script>
+
+</head>
+<!-- ↓ここから見える部分↓ -->
+<body>
+
+<center>
+<h1 id="a">スペースキーを押して下さい</h1>
+<span id="b"></span><span id="c"></span>
+</center>
+
+</body>
+</html>
